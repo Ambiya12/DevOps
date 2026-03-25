@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: devops-app-prod
+  namespace: argocd
+spec:
+  project: devops-training
+  source:
+    repoURL: https://github.com/Ambiya12/DevOps.git
+    targetRevision: develop
+    path: gitops/apps/devops-app/overlays/prod
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: devops-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
