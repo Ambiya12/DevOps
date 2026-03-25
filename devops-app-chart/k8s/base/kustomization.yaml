@@ -3,5 +3,7 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
-commonLabels:
-  app: devops-app
+labels:
+  - includeSelectors: true
+    pairs:
+      app: devops-app
